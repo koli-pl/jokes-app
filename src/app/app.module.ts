@@ -1,8 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { JokesModule } from './jokes/jokes.module';
+import { AppComponent } from '@app/app.component';
+import { JokesModule } from '@jokes/jokes.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { JokesModule } from './jokes/jokes.module';
   ],
   imports: [
     BrowserModule,
-    JokesModule
+    JokesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

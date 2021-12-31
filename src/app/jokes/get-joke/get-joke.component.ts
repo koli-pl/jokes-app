@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { JokeApiService } from '@services/joke-api.service';
+
 @Component({
   selector: 'app-get-joke',
   template: `
     <p>
-      get-joke works!
+      <input (click)="loadJoke()" type="button" value="Load random joke">
     </p>
   `,
   styles: [
@@ -12,9 +14,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GetJokeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jokeApiService: JokeApiService) { }
 
   ngOnInit(): void {
   }
 
+  loadJoke() {
+    this.jokeApiService.getJoke()
+      .subscribe((ans) => {
+        console.log(ans);
+      });
+  }
 }
