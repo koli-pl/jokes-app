@@ -10,7 +10,7 @@ export interface JokeFlags {
 export interface Joke {
     error: boolean,
     category: string,
-    type: string,
+    type: JokeType,
     joke?: string;
     setup?: string,
     delivery?: string,
@@ -18,4 +18,9 @@ export interface Joke {
     id: number,
     safe: boolean,
     lang: string
+}
+
+export enum JokeType {
+    SIMPLE = 'single',
+    QUESTION_AND_ANSWER = 'twopart'
 }

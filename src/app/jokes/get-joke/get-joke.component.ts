@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { LoadComponentService } from '@app/dynamic-load/load-component.service';
+import { Joke } from '@app/models/jokes.model';
 import { JokeApiService } from '@services/joke-api.service';
 
 @Component({
@@ -14,7 +15,11 @@ import { JokeApiService } from '@services/joke-api.service';
 })
 export class GetJokeComponent implements OnInit {
 
-  constructor(private jokeApiService: JokeApiService) { }
+  constructor(
+    private jokeApiService: JokeApiService,
+    private viewContainerRef: ViewContainerRef,
+    private loadComponentService: LoadComponentService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +27,17 @@ export class GetJokeComponent implements OnInit {
   loadJoke() {
     this.jokeApiService.getJoke()
       .subscribe((ans) => {
-        console.log(ans);
+        this.loadComponent(ans as Joke);
+      });
+  }
+
+  loadComponent(joke: Joke) {
+
+    this.loadComponentService.loadComponent(joke)
+      .then(loadedComponent => {
+        this.viewContainerRef.createComponent(
+          loadedComponent[this.loadComponentService.getClassName(joke.type)]
+        );
       });
   }
 }
