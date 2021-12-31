@@ -28,7 +28,8 @@
       "@services/*": ["app/services/*"],
       "@models/*": ["app/models/*"],
       "@environments/*":["environments/*"]
-    }
+    },
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

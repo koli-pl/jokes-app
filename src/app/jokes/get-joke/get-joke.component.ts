@@ -32,12 +32,12 @@ export class GetJokeComponent implements OnInit {
   }
 
   loadComponent(joke: Joke) {
-
     this.loadComponentService.loadComponent(joke)
       .then(loadedComponent => {
-        this.viewContainerRef.createComponent(
+        let newComponentRef = this.viewContainerRef.createComponent(
           loadedComponent[this.loadComponentService.getClassName(joke.type)]
-        );
+        ) as any;
+        newComponentRef.instance['jokeData'] = joke;
       });
   }
 }
